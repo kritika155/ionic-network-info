@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-card>
+      <ion-item *ngIf="networkChange">
+        <ion-label>
+          Network Info:-{{networkInfo.status}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="mail">&nbsp;</ion-icon>Email
+          </ion-label>
+          <ion-input [(ngModel)]="data.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="eye">&nbsp;</ion-icon>Password
+          </ion-label>
+          <ion-input [(ngModel)]="data.password" type="password"></ion-input>
+        </ion-item>
+        <ion-button expand="block" color="tertiary" (click)="login(data)">
+          <ion-icon name="person-add"></ion-icon>Login
+        </ion-button>
+  </ion-card>
+  <ion-button (click)="deviceInfo()">Info</ion-button>
+</ion-content>
