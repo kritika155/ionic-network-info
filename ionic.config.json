@@ -1,5 +1,7 @@
 {
   "name": "ionic-network-info",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
