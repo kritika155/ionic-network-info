@@ -1,14 +1,38 @@
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-        <ion-input [(ngModel)]="customer.name" placeholder="Enter Your Name"><ion-icon name="contact"></ion-icon></ion-input><br>
-        <ion-input [(ngModel)]="customer.email" placeholder="Enter Email"><ion-icon name="mail"></ion-icon></ion-input><br>
-        <ion-input [(ngModel)]="customer.password" placeholder="Enter Password"><ion-icon name="lock"></ion-icon></ion-input><br>
-        <ion-input [(ngModel)]="customer.address" placeholder="Enter Address"><ion-icon name="home"></ion-icon></ion-input><br>
-        <ion-input [(ngModel)]="customer.phone" placeholder="Enter Number"><ion-icon name="phone-portrait"></ion-icon></ion-input><br>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-button color="tertiary" expand="full" fill="outline" (click)="addCustomer();goto()"><ion-icon name="person-add"></ion-icon>Sign Up</ion-button><br>
-</ion-content>
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+      Registration -[Internet - {{networkInfo.status}} ]
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content  color="primary">
+    <form  #form="ngForm" (ngSubmit)="register(form)">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h3>Create your account!</h3>
+            </div>
+            <div padding>
+              <ion-item>
+                <ion-input  name="name" type="text" placeholder="Name" [(ngModel)]="name" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]="email"required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="confirm" type="password" placeholder="Password again" [(ngModel)]="confirm"  required></ion-input>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>

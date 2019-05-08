@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
 import { Network } from '@ionic-native/network/ngx';
 
 @Component({
@@ -8,46 +7,29 @@ import { Network } from '@ionic-native/network/ngx';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  data={
-    email:'',
-    password:''
-  }
-  networkChange=false;
+
+
+  ngOnInit() {}
+
+  constructor(private network: Network) { }
   networkInfo={
     status:''
   }
-  disconnectSubscription:any;
-  connectSubscription:any;
-  
-  constructor(private loginService:LoginService,private network: Network) { }
+  disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    console.log('network was disconnected :-(');
+    this.networkInfo.status='Disconnected'
 
-  ngOnInit() {
-    this.disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      console.log('network was disconnected :-(');
-      this.networkInfo.status='Network was disconnected';
-      this.networkChange=true;
+  });
+  connectSubscription = this.network.onConnect().subscribe(() => {
+    console.log('network connected!');
+    this.networkInfo.status='Connected';
+    //localStorage.setItem('NetworkStatus', JSON.stringify(this.networkInfo.status));
 
-    });
-    this.connectSubscription = this.network.onConnect().subscribe(() => {
-      console.log('network connected!');
-      this.networkInfo.status='Connected'
-      this.networkChange=true;
-
-      setTimeout(() => {
-        if (this.network.type === 'wifi') {
-          console.log('we got a wifi connection, woohoo!');
-        }
-      }, 3000);
-    });
-  }
-  
-    
-  
-  login(details){
-    this.loginService.login(details).subscribe((result)=>{
-      localStorage.setItem('user',JSON.stringify(result));
-      console.log(result)
-    })
-  }
+    setTimeout(() => {
+      if (this.network.type === 'wifi') {
+        console.log('we got a wifi connection, woohoo!');
+      }
+    }, 3000);
+  });
 
 }
